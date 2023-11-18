@@ -15,21 +15,20 @@ jobs:
         id: tag
         
       - name: Starting the nightly build for $TAG
-        # run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
-        run: echo "The tag is $TAG"
+        run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
+        # run: echo "The tag is $TAG"
         
       - name: Check out the code
         uses: actions/checkout@v4
         
       - name: Create the artifact
-      #   # run: tar -cvf nightly-${{ steps.tag.outputs.TAG }}.tar ./*
-        run: tar -cvf nightly-${TAG}.tar ./*
+        run: tar -cvf nightly-${{ steps.tag.outputs.TAG }}.tar ./*
         
       - name: Upload the artifact
         uses: actions/upload-artifact@v3
         with:
-          name: nightly-${TAG}.tar
-          path: nightly-${TAG}.tar
-          # name: nightly-${{ steps.tag.outputs.TAG }}.tar
-          # path: nightly-${{ steps.tag.outputs.TAG }}.tar
+          # name: nightly-${TAG}.tar
+          # path: nightly-${TAG}.tar
+          name: nightly-${{ steps.tag.outputs.TAG }}.tar
+          path: nightly-${{ steps.tag.outputs.TAG }}.tar
 
