@@ -16,6 +16,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 这一步自动识别为Initialize containers
     services:
       postgres:
         image: postgres:16.1
@@ -23,6 +24,8 @@ jobs:
           POSTGRES_USER: ${{ env.DATABASE_USER }}
           POSTGRES_PASSWORD: ${{ env.DATABASE_PASS }}
           POSTGRES_DB: ${{ env.DATABASE_NAME }}
+        volumes:
+          - /source/directory:/destination/directory
         ports:
           - 5432:5432
         options: >-
@@ -32,7 +35,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
