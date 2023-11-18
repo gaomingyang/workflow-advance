@@ -13,6 +13,9 @@ jobs:
         # run: echo "::set-output name=TAG::$(date +%F)" 
         run: echo "TAG=$(date +%F)" >> $GITHUB_ENV
         id: tag
+
+      - name: Load environment variables
+        run: source $GITHUB_ENV
         
       - name: Starting the nightly build for $TAG
         run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
@@ -22,13 +25,14 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Create the artifact
-        run: tar -cvf nightly-${{ steps.tag.outputs.TAG }}.tar ./*
+        # run: tar -cvf nightly-${{ steps.tag.outputs.TAG }}.tar ./*
+        run: tar -cvf nightly-$TAG.tar ./*
         
       - name: Upload the artifact
         uses: actions/upload-artifact@v3
         with:
-          # name: nightly-${TAG}.tar
-          # path: nightly-${TAG}.tar
-          name: nightly-${{ steps.tag.outputs.TAG }}.tar
-          path: nightly-${{ steps.tag.outputs.TAG }}.tar
+          name: nightly-${TAG}.tar
+          path: nightly-${TAG}.tar
+          # name: nightly-${{ steps.tag.outputs.TAG }}.tar
+          # path: nightly-${{ steps.tag.outputs.TAG }}.tar
 
