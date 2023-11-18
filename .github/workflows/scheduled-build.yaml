@@ -3,20 +3,23 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '* */2 * * *'
 jobs:
   schedule-task:
     runs-on: ubuntu-latest
     steps:
       - name: Create a tag for the archive
+        id: tag
         # The `set-output` command is deprecated and will be disabled soon. using environment files instead  https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files
         # run: echo "::set-output name=TAG::$(date +%F)" 
         run: echo "TAG=$(date +%F)" >> $GITHUB_ENV
-        id: tag
+        
         
       - name: Starting the nightly build for $TAG old
-        run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
-        # run: echo "The tag is $TAG"
+        env:
+          TAG: ${{ steps.tag.outputs.TAG }}
+        # run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
+        run: echo "The tag is $TAG"
         
       - name: Starting the nightly build for $TAG 
         run: echo "The tag is $TAG"

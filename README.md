@@ -23,3 +23,28 @@ seed_database.py
 涉及文件：
 .github/workflows/scheduled-build.yaml
 
+set-output被废弃了，需要调整。还没调整好。
+
+
+### composite actions 合成行为
+多个项目可以共用一个compositive的action的reference
+直接引用action地址就可以
+<!-- runs-on:xxx 改成 runs: "composite" -->
+
+库中文件名必须为action.yml或action.yaml
+
+
+composite actions 属性：
+* name
+* description
+inputs 可选
+outpus 可选
+runs:
+   using:"composite"
+   steps:
+     - run: xxx
+     - uses: xxx
+
+
+
+    

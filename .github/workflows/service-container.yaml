@@ -1,4 +1,4 @@
-name: Seed Database
+name: Service Container Seed Database
 on:
   push:
     branches: [ main ]
