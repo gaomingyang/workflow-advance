@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '*/30 * * * *'
 jobs:
-  date:
+  schedule-task:
     runs-on: ubuntu-latest
     steps:
       - name: Create a tag for the archive
@@ -18,16 +18,18 @@ jobs:
         # run: echo "The tag is ${{ steps.tag.outputs.TAG }}"
         run: echo "The tag is $TAG"
         
-      # - name: Check out the code
-      #   uses: actions/checkout@v4
+      - name: Check out the code
+        uses: actions/checkout@v4
         
-      # - name: Create the artifact
+      - name: Create the artifact
       #   # run: tar -cvf nightly-${{ steps.tag.outputs.TAG }}.tar ./*
-      #   run: tar -cvf nightly-$TAG.tar ./*
+        run: tar -cvf nightly-$TAG.tar ./*
         
-      # - name: Upload the artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #    name: nightly-${{ steps.tag.outputs.TAG }}.tar
-      #    path: nightly-${{ steps.tag.outputs.TAG }}.tar
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nightly-$TAG.tar
+          path: nightly-$TAG.tar
+          # name: nightly-${{ steps.tag.outputs.TAG }}.tar
+          # path: nightly-${{ steps.tag.outputs.TAG }}.tar
 
