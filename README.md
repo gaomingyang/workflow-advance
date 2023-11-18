@@ -1,16 +1,13 @@
 # workflow-advance
 
-## use service container in Github Action
-job里面可以利用service属性加入docker容器
+## Action 的job里面可以利用service属性利用docker容器部署和运行
 * job runner must be linux based(ubuntu-latest)
 * self-hosted runner also must be linux and docker.
 * services will be run directly on the runner
 * use localhost and a mapped port to connect to the service
 
-展示利用github action构建docker容器
-
 涉及文件：
-.github/workflow/service-container.yaml
+.github/workflows/service-container.yaml
 requirements.txt
 seed_database.py
 
@@ -22,3 +19,7 @@ seed_database.py
 * schedules are deactived :
     - when a public repo is forked
     - after 60 days of inactivity
+
+涉及文件：
+.github/workflows/scheduled-build.yaml
+
